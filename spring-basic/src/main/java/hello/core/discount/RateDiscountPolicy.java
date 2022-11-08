@@ -9,7 +9,7 @@ public class RateDiscountPolicy implements DiscountPolicy{
     @Override
     public int discount(Member member, int price) {
         // cmd + shift + t -> test 파일 바로 만들기
-        if(member.getGrade()== Grade.VIP){
+        if(member.getGrade() == Grade.VIP){
             return price*discountPercent/100;
         }else{
             return 0;
