@@ -20,17 +20,20 @@ public class AppConfig {
     // => DI (의존관계 주입)
     @Bean
     public MemberService memberService(){
+        System.out.println("AppConfig.memberService");
         return new MemberServiceImpl(memberRepository());
     }
     // bean : spring container에 등록
 
     @Bean
     public MemberRepository memberRepository() {
+        System.out.println("AppConfig.memberRepository");
         return new MemoryMemberRepository();
     }
 
     @Bean
     public OrderService orderService() {
+        System.out.println("AppConfig.orderService");
         return new OrderServiceImpl((MemoryMemberRepository) memberRepository(),discountPolicy());
     }
 
