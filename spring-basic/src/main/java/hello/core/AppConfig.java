@@ -35,6 +35,7 @@ public class AppConfig {
     public OrderService orderService() {
         System.out.println("AppConfig.orderService");
         return new OrderServiceImpl((MemoryMemberRepository) memberRepository(),discountPolicy());
+//        return null;
     }
 
     @Bean
