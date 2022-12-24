@@ -1,6 +1,9 @@
 package hellojpa;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
@@ -184,36 +187,34 @@ public class JpaMain {
 //            em.persist(member2);
 //
 //            member.getHomeAddress().setCity("newCity");
-            Member member = new Member();
-            member.setUsername("member1");
-            member.setHomeAddress(new Address("city1", "street", "10000"));
-
-            member.getFavoriteFoods().add("dd");
-            member.getFavoriteFoods().add("aa");
-            member.getFavoriteFoods().add("cc");
-
-            member.getAddressHistory().add(new Address("city2", "street", "10000"));
-            member.getAddressHistory().add(new Address("city3", "street", "10000"));
-
-            em.persist(member);
-
-            em.flush();
-            em.clear();
-
-            System.out.println("============================");
-            Member findMember = em.find(Member.class, member.getId());
-
-//            findMember.getHomeAddress().setCity(""); // 이거 하지마삼
-            Address a = findMember.getHomeAddress();
-            findMember.setHomeAddress(new Address("city4", a.getStreet(), a.getZipcode()));
-
-            findMember.getFavoriteFoods().remove("cc");
-            findMember.getFavoriteFoods().add("sss");
-
-            findMember.getAddressHistory().remove(new Address("city2", "street", "10000"));
-            findMember.getAddressHistory().add(new Address("city5", "street", "10000"));
-
-
+//            Member member = new Member();
+//            member.setUsername("member1");
+//            member.setHomeAddress(new Address("city1", "street", "10000"));
+//
+//            member.getFavoriteFoods().add("dd");
+//            member.getFavoriteFoods().add("aa");
+//            member.getFavoriteFoods().add("cc");
+//
+//            member.getAddressHistory().add(new Address("city2", "street", "10000"));
+//            member.getAddressHistory().add(new Address("city3", "street", "10000"));
+//
+//            em.persist(member);
+//
+//            em.flush();
+//            em.clear();
+//
+//            System.out.println("============================");
+//            Member findMember = em.find(Member.class, member.getId());
+//
+////            findMember.getHomeAddress().setCity(""); // 이거 하지마삼
+//            Address a = findMember.getHomeAddress();
+//            findMember.setHomeAddress(new Address("city4", a.getStreet(), a.getZipcode()));
+//
+//            findMember.getFavoriteFoods().remove("cc");
+//            findMember.getFavoriteFoods().add("sss");
+//
+//            findMember.getAddressHistory().remove(new Address("city2", "street", "10000"));
+//            findMember.getAddressHistory().add(new Address("city5", "street", "10000"));
 
 //            List<Address> addressHistory = findMember.getAddressHistory();
 //            for (Address address : addressHistory) {
@@ -225,6 +226,29 @@ public class JpaMain {
 //                System.out.println("favoriteFood = " + favoriteFood);
 //            }
 
+//            // JPQL
+//            List<Member> resultList = em.createQuery("select m from Member  m where m.username like '%kim%'",
+//                    Member.class).getResultList();
+//            for (Member member : resultList) {
+//                System.out.println("member = " + member);
+//            }
+
+//            // Criteria
+//            CriteriaBuilder cb = em.getCriteriaBuilder();
+//            CriteriaQuery<Member> query = cb.createQuery(Member.class);
+//
+//            Root<Member> m = query.from(Member.class);
+//            CriteriaQuery<Member> cq = query.select(m).where(cb.equal((m.get("username")), "kim"));
+//            List<Member> resultList = em.createQuery(cq).getResultList();
+            Member member = new Member();
+            member.setUsername("member1");
+            em.persist(member);
+
+            List<Member> resultList = em.createNativeQuery("SELECT ID, AGE, TEAM_ID, NAME FROM MEMBER WHERE NAME = 'kim'", Member.class).getResultList();
+
+            for (Member member1 : resultList) {
+                System.out.println("member1 = " + member1);
+            }
 
             tx.commit();
         } catch (Exception e){
