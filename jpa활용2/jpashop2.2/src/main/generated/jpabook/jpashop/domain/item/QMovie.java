@@ -38,7 +38,7 @@ public class QMovie extends EntityPathBase<Movie> {
     public final NumberPath<Integer> price = _super.price;
 
     //inherited
-    public final NumberPath<Integer> stackQuantity = _super.stackQuantity;
+    public final NumberPath<Integer> stockQuantity = _super.stockQuantity;
 
     public QMovie(String variable) {
         super(Movie.class, forVariable(variable));

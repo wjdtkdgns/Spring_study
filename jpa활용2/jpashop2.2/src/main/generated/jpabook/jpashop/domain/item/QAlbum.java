@@ -38,7 +38,7 @@ public class QAlbum extends EntityPathBase<Album> {
     public final NumberPath<Integer> price = _super.price;
 
     //inherited
-    public final NumberPath<Integer> stackQuantity = _super.stackQuantity;
+    public final NumberPath<Integer> stockQuantity = _super.stockQuantity;
 
     public QAlbum(String variable) {
         super(Album.class, forVariable(variable));

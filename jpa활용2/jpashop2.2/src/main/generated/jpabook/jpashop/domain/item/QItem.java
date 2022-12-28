@@ -28,7 +28,7 @@ public class QItem extends EntityPathBase<Item> {
 
     public final NumberPath<Integer> price = createNumber("price", Integer.class);
 
-    public final NumberPath<Integer> stackQuantity = createNumber("stackQuantity", Integer.class);
+    public final NumberPath<Integer> stockQuantity = createNumber("stockQuantity", Integer.class);
 
     public QItem(String variable) {
         super(Item.class, forVariable(variable));

@@ -24,7 +24,7 @@ public class ItemService {
         Item item = itemRepository.findOne(itemId);
         item.setName(name);
         item.setPrice(price);
-        item.setStackQuantity(stockQuantity);
+        item.setStockQuantity(stockQuantity);
     }
 
     public List<Item> findItems() {
