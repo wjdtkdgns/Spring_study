@@ -1,0 +1,4 @@
+slack:
+  token: xoxb-4998032644739-4998162132979-LZwVfavW9kPSAgd1TScquu1M
+  channel:
+    monitor: 'test'
