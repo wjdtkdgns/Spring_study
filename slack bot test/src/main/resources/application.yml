@@ -1,4 +1,4 @@
 slack:
   webhook:
-    token: xoxb-4998032644739-4998162132979-LZwVfavW9kPSAgd1TScquu1M
-    url: https://hooks.slack.com/services/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
+    token: ${TOKEN}
+    url: ${URL}
