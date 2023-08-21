@@ -4,6 +4,7 @@ import hello.advanced.trace.TraceId;
 import hello.advanced.trace.TraceStatus;
 import hello.advanced.trace.hellotrace.HelloTraceV2;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,7 +19,7 @@ public class OrderServiceV2 {
         TraceStatus status = null;
         try {
             status = trace.beginSync(traceId, "OrderService.orderItem()");
-            orderRepository.save(traceId, itemId);
+            orderRepository.save(status.getTraceId(), itemId);
             trace.end(status);
         } catch (Exception e) {
             trace.exception(status, e);
