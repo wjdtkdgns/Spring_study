@@ -2,6 +2,7 @@ package com.example.api.service
 
 import com.example.api.domain.Coupon
 import com.example.api.producer.CouponCreateProducer
+import com.example.api.repository.AppliedUserRepository
 import com.example.api.repository.CouponCountRepository
 import com.example.api.repository.CouponRepository
 import org.springframework.stereotype.Service
@@ -11,6 +12,7 @@ class ApplyService(
     private val couponRepository: CouponRepository,
     private val couponCountRepository: CouponCountRepository,
     private val couponCreateProducer: CouponCreateProducer,
+    private val appliedUserRepository: AppliedUserRepository,
 ) {
     // race condition 발생 -> count 값에 대해 동시 접근해서
 //    fun apply(uid: Long){
@@ -36,6 +38,12 @@ class ApplyService(
 
     // kafka
     fun apply(uid: Long) {
+        val apply = appliedUserRepository.add(uid)
+
+        if (apply != 1L){
+            return
+        }
+
         val count = couponCountRepository.increment()
 
         if (count > 100) {

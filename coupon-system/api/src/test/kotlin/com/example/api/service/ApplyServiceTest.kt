@@ -24,9 +24,7 @@ class ApplyServiceTest(
 
             count shouldBe 1
         }
-    }
 
-    context("다수 응모 test"){
         test("여러명 응모"){
             val threadCount = 1000
             val executorService = Executors.newFixedThreadPool(32)
@@ -48,6 +46,29 @@ class ApplyServiceTest(
             val count = couponRepository.count()
 
             count shouldBe 100
+        }
+
+        test("한명당 한 번만 발급"){
+            val threadCount = 1000
+            val executorService = Executors.newFixedThreadPool(32)
+            val latch = CountDownLatch(threadCount)
+
+            for (i in 1L..threadCount) {
+                executorService.submit {
+                    try {
+                        applyService.apply(1L)
+                    }
+                    finally {
+                        latch.countDown()
+                    }
+                }
+            }
+
+            latch.await()
+
+            val count = couponRepository.count()
+
+            count shouldBe 1
         }
     }
 })
