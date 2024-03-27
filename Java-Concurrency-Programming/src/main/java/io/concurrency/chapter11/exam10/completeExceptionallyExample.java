@@ -23,7 +23,7 @@ public class completeExceptionallyExample {
         System.out.println("result: " + cf2.join());
     }
 
-    private static void getData(CompletableFuture cf) {
+    private static void getData(CompletableFuture<String> cf) {
         try {
             System.out.println("비동기 작업 수행 중..");
             Thread.sleep(500);
