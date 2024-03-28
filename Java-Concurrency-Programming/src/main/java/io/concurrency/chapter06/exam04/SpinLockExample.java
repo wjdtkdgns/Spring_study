@@ -1,4 +1,4 @@
-package io.concurrency.chapter06.exam05;
+package io.concurrency.chapter06.exam04;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 

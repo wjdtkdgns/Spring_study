@@ -7,7 +7,6 @@ public class InstanceStaticMethodSynchronizedExamples {
 
     public synchronized void incrementInstanceCount(){  // this 가 모니터가 된다
         instanceCount++;
-        staticCount++;
         System.out.println(Thread.currentThread().getName() + " 가 인스턴스 카운터를 증가시켰습니다. 현재 값:" + instanceCount);
     }
     public static synchronized void incrementStaticCount(){ // InstanceStaticMethodSynchronizedExamples 가 모니터가 된다
@@ -19,25 +18,25 @@ public class InstanceStaticMethodSynchronizedExamples {
         InstanceStaticMethodSynchronizedExamples example = new InstanceStaticMethodSynchronizedExamples();
 
         Thread thread1 = new Thread(() -> {
-            for (int i = 0; i < 1000000; i++) {
+            for (int i = 0; i < 100000; i++) {
                 example.incrementInstanceCount();
             }
         },"스레드 1");
 
         Thread thread2 = new Thread(() -> {
-            for (int i = 0; i < 1000000; i++) {
+            for (int i = 0; i < 100000; i++) {
                 example.incrementInstanceCount();
             }
         },"스레드 2");
 
         Thread thread3 = new Thread(() -> {
-            for (int i = 0; i < 1000000; i++) {
+            for (int i = 0; i < 100000; i++) {
                 InstanceStaticMethodSynchronizedExamples.incrementStaticCount();
             }
         },"스레드 3");
 
         Thread thread4 = new Thread(() -> {
-            for (int i = 0; i < 1000000; i++) {
+            for (int i = 0; i < 100000; i++) {
                 InstanceStaticMethodSynchronizedExamples.incrementStaticCount();
             }
         },"스레드 4");

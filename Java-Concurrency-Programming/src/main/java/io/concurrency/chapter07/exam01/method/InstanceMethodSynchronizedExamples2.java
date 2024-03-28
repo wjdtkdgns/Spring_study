@@ -23,14 +23,14 @@ public class InstanceMethodSynchronizedExamples2 {
         InstanceMethodSynchronizedExamples2 counter2 = new InstanceMethodSynchronizedExamples2();
 
         Thread thread1 = new Thread(() -> {
-            for (int i = 0; i < 1000000; i++) {
+            for (int i = 0; i < 10000; i++) {
                 counter1.increment();
                 counter2.decrement();
             }
         });
 
         Thread thread2 = new Thread(() -> {
-            for (int i = 0; i < 1000000; i++) {
+            for (int i = 0; i < 10000; i++) {
                 counter2.increment();
                 counter1.decrement();
             }
