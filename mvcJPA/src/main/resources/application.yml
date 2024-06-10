@@ -1,0 +1,61 @@
+# SERVER
+server:
+  port: 8080
+  http2:
+    enabled: true
+  shutdown: graceful # timeout configuration property : spring.lifecycle.timeout-per-shutdown-phase
+  error:
+    include-exception: true # Include the "exception" attribute.
+    include-stacktrace: always # When to include a "stacktrace" attribute.
+    whitelabel.enabled: true
+
+logging:
+  level:
+    root: INFO
+    com.balancemania: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.springframework.jdbc.core.JdbcTemplate: DEBUG
+    org.springframework.jdbc.core.StatementCreatorUtils: TRACE
+    org.springframework.orm.jpa.JpaTransactionManager: DEBUG
+    org.springframework.web.server.adapter.HttpWebHandlerAdapter: DEBUG
+    reactor.netty.http.client: DEBUG
+    io.awspring.cloud: DEBUG
+
+# SPRING
+spring:
+  lifecycle:
+    timeout-per-shutdown-phase: 5s # format : https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-external-config-conversion-duration
+  application:
+    name: webflux-coroutine-jpa
+  jackson:
+    serialization:
+      indent_output: true
+
+# DATABASE
+mvc-jpa:
+  master:
+    datasource:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url:
+      username: admin
+      password: adminadmin
+      hikari:
+        minimum-idle: 15
+        maximum-pool-size: 25
+  jpa:
+    properties:
+      hibernate.default_batch_fetch_size: 10
+      hibernate.cache.use_second_level_cache: false
+      hibernate.cache.use_query_cache: false
+      hibernate.order_inserts: true
+      hibernate.order_updates: true
+      hibrenate.jdbc.batch_size: 50
+      hibernate.jdbc.batch_versioned_data: true
+      hibernate.jdbc.time_zone: Asia/Seoul
+      hibernate.format_sql: true
+      hibernate.hbm2ddl.auto: none
+    show-sql: false
+    database: mysql
+
+
