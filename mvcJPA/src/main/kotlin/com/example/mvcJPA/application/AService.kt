@@ -1,6 +1,7 @@
 package com.example.mvcJPA.application
 
 import com.example.mvcJPA.infrastructure.ARepository
+import org.springframework.scheduling.config.Task
 import org.springframework.stereotype.Service
 
 @Service
@@ -33,5 +34,10 @@ class AService(
     fun getRandomAByInttWithC(): Any? {
         return aRepository.getRandomAByInttWithC((1..2000).random().toLong())
 
+    }
+
+    fun quit(): Any? {
+        Thread.sleep(1000)
+        return null
     }
 }

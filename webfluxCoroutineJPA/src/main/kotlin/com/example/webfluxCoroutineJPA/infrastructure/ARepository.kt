@@ -72,7 +72,7 @@ class ACustomRepositoryImpl : ACustomRepository, QuerydslRepositorySupport(A::cl
         return JPAQuery<QA>(entityManager)
             .select(QABModel(qA, qB))
             .from(qA)
-            .join(qB).on(qA.intt.eq(qB.aid))
+            .join(qB).on(qA.id.eq(qB.aid))
             .where(
                 qA.intt.eq(intt)
             ).fetch()
@@ -82,7 +82,7 @@ class ACustomRepositoryImpl : ACustomRepository, QuerydslRepositorySupport(A::cl
         return JPAQuery<QA>(entityManager)
             .select(QACModel(qA, qC))
             .from(qA)
-            .join(qC).on(qA.intt.eq(qC.aid))
+            .join(qC).on(qA.id.eq(qC.aid))
             .where(
                 qA.intt.eq(intt)
             ).fetch()

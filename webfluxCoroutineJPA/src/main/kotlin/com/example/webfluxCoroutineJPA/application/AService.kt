@@ -82,4 +82,9 @@ class AService(
         return withContext(Dispatchers.IO) { aRepository.getRandomAByInttWithC((1..2000).random().toLong()) }
 
     }
+
+    suspend fun quit(): Any? {
+        delay(1000)
+        return null
+    }
 }

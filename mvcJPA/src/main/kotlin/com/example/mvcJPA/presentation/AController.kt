@@ -29,4 +29,7 @@ class AController(
 
     @GetMapping("randomAByIntt-withC")
     fun getRandomAByInttWithC() = aService.getRandomAByInttWithC().wrapOk()
+
+    @GetMapping("quit")
+    suspend fun quit() = aService.quit().wrapOk()
 }
